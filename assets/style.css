@@ -1,0 +1,15 @@
+.container {
+    padding: 5px;
+    margin-top: 20px;
+}
+
+/* shrink the text box inside each date input */
+.DateInput_input {
+    height: 32x !important;
+    cursor: pointer !important;
+}
+
+.tooltip-inner {
+    white-space: pre-line;   /* honor \n in Python strings */
+    max-width: 300px;        /* wrap long lines */
+}
