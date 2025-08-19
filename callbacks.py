@@ -169,7 +169,7 @@ def log_visit(_pathname):
         ip[:-3]+"xxx",
         request.path,
         request.referrer,
-        request.headers.get("User-Agent", "")
+        # request.headers.get("User-Agent", "")
     ]
     with open("visits.csv", "a", newline="", encoding="utf-8") as f:
         csv.writer(f).writerow(row)

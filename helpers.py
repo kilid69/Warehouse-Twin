@@ -123,4 +123,4 @@ def visited_path(fig:go.Figure, pos:list, route_nodes:list, i:int):
 def ensure_logfile(path="visits.csv"):
     if not os.path.exists(path):
         with open(path, "w", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerow(["timestamp_utc", "ip", "path", "referrer", "user_agent"])
+            csv.writer(f).writerow(["timestamp_utc", "ip", "path", "referrer"])

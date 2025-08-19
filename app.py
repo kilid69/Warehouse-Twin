@@ -1,6 +1,6 @@
 import pandas as pd, numpy as np, plotly.graph_objects as go
 import networkx as nx
-from helpers import nearest_neighbor_order, build_node_route, plot_graph
+from helpers import nearest_neighbor_order, build_node_route, plot_graph, ensure_logfile
 from dash import Dash, dcc, html, Output, Input, no_update
 import pickle
 import dash_bootstrap_components as dbc
@@ -14,6 +14,7 @@ pio.templates.default = "plotly_white"
 app = Dash(__name__, title="Warehouse Dashboard", 
            external_stylesheets=[dbc.themes.MINTY, ])  # create the Dash app instance
 
+ensure_logfile()
 # Load Warehouse Plot
 with open("warehouse_graph.pkl", "rb") as f:
     G = pickle.load(f)
