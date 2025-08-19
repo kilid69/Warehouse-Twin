@@ -1,6 +1,7 @@
 import pandas as pd, numpy as np, plotly.graph_objects as go
 import networkx as nx
 import math
+import os, csv
 import plotly.graph_objects as go
 
 
@@ -117,3 +118,9 @@ def visited_path(fig:go.Figure, pos:list, route_nodes:list, i:int):
     
     fig.add_trace(visited_trace)
     return fig
+
+
+def ensure_logfile(path="visits.csv"):
+    if not os.path.exists(path):
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            csv.writer(f).writerow(["timestamp_utc", "ip", "path", "referrer", "user_agent"])

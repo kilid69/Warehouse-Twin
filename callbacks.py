@@ -2,6 +2,9 @@ from dash import callback, Input, Output, State, ctx, html, no_update
 import pickle
 import pandas as pd
 import plotly.express as px
+import os, csv
+from datetime import datetime, timezone
+from flask import request
 from helpers import nearest_neighbor_order, build_node_route, plot_graph, path_length, visited_path
 
 @callback(
@@ -153,3 +156,21 @@ def order_details(orderID, toggle_path_optimizer):
         return fig, path_string
     else:
         return fig, html.P(f"For this Order there is no data available. Please select another Order!", style={"font-size":"18px"})
+
+
+@callback(Output("visit-logger", "children"), 
+          Input("url", "pathname"))
+def log_visit(_pathname):
+    ip = (request.headers.get("X-Forwarded-For", "").split(",")[0].strip()
+          or request.headers.get("X-Real-IP", "")
+          or request.remote_addr)
+    row = [
+        datetime.now(timezone.utc).isoformat(),
+        ip[:-3]+"xxx",
+        request.path,
+        request.referrer,
+        request.headers.get("User-Agent", "")
+    ]
+    with open("visits.csv", "a", newline="", encoding="utf-8") as f:
+        csv.writer(f).writerow(row)
+    return ""

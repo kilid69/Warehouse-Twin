@@ -29,6 +29,7 @@ end_date=date(2023, 10, 15)
 # The layout defines what appears on the web page: a Graph and a timer (Interval).
 app.layout = html.Div([
     dbc.Row([
+        dcc.Location(id="url"),
         dbc.Col([html.H1("Warehouse Dashboard")],xs=12,lg=7),
         dbc.Col([html.H5("Pick Date Range:")],style={"align-content":"center"},xs=12,lg=2),
         dbc.Col([
@@ -114,7 +115,8 @@ app.layout = html.Div([
                                 “Order Picking Dataset from a Warehouse of a Footwear Manufacturing Company”,
                                 Mendeley Data, \nV1, doi: 10.17632/pf2w725pw3.1
                                 """    
-                            )) 
+                            )),
+                html.Div(id="visit-logger", style={"display": "none"}),
         ], xs=12, md=5)
         ], justify="center", style={"margin-bottom": "25px"})   
 ], className="container")
