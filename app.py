@@ -62,6 +62,7 @@ app.layout = html.Div([
                         dbc.CardBody([
                             html.H6("Select Order to see details:"),
                             dcc.Dropdown(options=[], id="orders-dropdown")]),
+                            dbc.Tooltip(target="orders-dropdown", children="If this Dropdown is empty, select an operator from the barchart above."),
                             html.Div(id="operator-orders-info", style={"margin-left": "20px"})
                     ], style={"margin-top":"20px", "margin-bottom":"50px"}, className="border-primary")
                 ]),
@@ -91,8 +92,9 @@ app.layout = html.Div([
                 dbc.CardHeader("Information about this dashboard", className="bg-primary text-white"),
                 dbc.CardBody([
                     html.Div([
-                        html.P("""This Data has a very limited information about the Orders. Therefore there is not much to explore.
-                               This Dashboard is just a prototype."""),
+                        html.P("""This Data has a very limited information about the Orders. And I also assume it is incomplete because it
+                                has less than 5 orders in most days. Therefore there is not much to explore.
+                                This Dashboard is just a prototype."""),
                     ],),
                 ])
             ], className="border-primary",  style={"margin-top":"20px"})
@@ -100,7 +102,7 @@ app.layout = html.Div([
     ]),
     dbc.Row([
         dbc.Col(
-            html.Div("Designed By Alireza Shirmohammadian"), xs=12, md=4), 
+            html.Div("Developed By Alireza Shirmohammadian"), xs=12, md=4), 
         ], justify="center"),
     dbc.Row([
         dbc.Col([

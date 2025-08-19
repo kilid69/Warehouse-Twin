@@ -1,6 +1,7 @@
 import pandas as pd, numpy as np, plotly.graph_objects as go
 import networkx as nx
 import math
+import plotly.graph_objects as go
 
 
 def nearest_neighbor_order(G, stops, start):
@@ -32,10 +33,6 @@ def build_node_route(G, stop_nodes:list):
     return route                      
 
 
-# stops = {"Start", S1, S2, S3, S4}
-# visit_order = nearest_neighbor_order(G, stops, start="Start")
-# route_nodes = build_node_route(G, visit_order + ["Start"])  # return to depot if you need
-
 def dist(a, b, G):
     ax, ay = G.nodes[a]["x"], G.nodes[a]["y"]
     bx, by = G.nodes[b]["x"], G.nodes[b]["y"]
@@ -48,8 +45,6 @@ def path_length(route_nodes, G):
     return total
 
 
-import plotly.graph_objects as go
-    
 def plot_graph(G, pos=None):
     if pos is None:
         pos = nx.spring_layout(G)
@@ -79,14 +74,14 @@ def plot_graph(G, pos=None):
                             hovertext=node_text, hoverinfo='text')
 
     fig = go.Figure([edge_trace, node_trace])
-    # fig.update_yaxes(scaleanchor="x", scaleratio=1)   # keep real scale
+
     fig.update_layout(
-        title="Hover over to see the details",                                # chart title
+        title="Zoom out or pan to see the whole warehouse", 
         xaxis=dict(
             # scaleanchor="y",
             showgrid=False, 
             range=[20, 700],
-            title="width (in Meter)"), # lock aspect ratio; hide grid
+            title="width (in Meter)"), 
         yaxis=dict(showgrid=False, range=[400, 800]),     # set a default range to zoom in
         showlegend=False,                            # hide legend for a cleaner look
         height=500,
@@ -116,7 +111,7 @@ def visited_path(fig:go.Figure, pos:list, route_nodes:list, i:int):
                 scaleanchor="y",
                 showgrid=False, 
                 range=[20, 700],
-                title="width (in Meter)"), # lock aspect ratio; hide grid
+                title="width (in Meter)"), 
             yaxis=dict(showgrid=False, range=[min(y_coords)-100, max(y_coords)+100])
             )
     
