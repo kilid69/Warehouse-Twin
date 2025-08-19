@@ -7,6 +7,7 @@ import dash_bootstrap_components as dbc
 from datetime import timedelta, date
 import callbacks
 import plotly.io as pio
+import socket
 # option A: set a global default
 pio.templates.default = "plotly_white" 
 
@@ -122,7 +123,10 @@ app.layout = html.Div([
         ], justify="center", style={"margin-bottom": "25px"})   
 ], className="container")
 
-
+import os
 
 if __name__ == "__main__": 
-    app.run(host= "0.0.0.0", port="8050", debug=False)   
+    hostname = socket.gethostname()
+    ip = socket.gethostbyname(hostname)
+    port = int(os.getenv("PORT", 8050))
+    app.run(host=ip, port=port, debug=False)   
