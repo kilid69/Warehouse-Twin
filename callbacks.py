@@ -130,6 +130,7 @@ def order_details(orderID, toggle_path_optimizer):
     # load base figure
     fig = plot_graph(G, pos)
     
+    length = 0
     paths = {}
     for op in co_pw_merged['operator'].unique():
         co_pw_merged_filtered_by_op = co_pw_merged.loc[co_pw_merged['operator']==op, :]
@@ -140,17 +141,19 @@ def order_details(orderID, toggle_path_optimizer):
         for i ,(_, path) in enumerate(paths.items()):
             path.insert(0, 'Start')
             route_nodes = build_node_route(G, path + ["Start"])
+            length += path_length(route_nodes, G)
             # add to figure
             fig = visited_path(fig, pos, route_nodes, i)
     else:
         for i ,(_, path) in enumerate(paths.items()):
             visit_order = nearest_neighbor_order(G, path, start="Start")
             route_nodes = build_node_route(G, visit_order + ["Start"])
+            length += path_length(route_nodes, G)
             # add to figure
             fig = visited_path(fig, pos, route_nodes, i)
 
     if paths:
-        length = path_length(route_nodes, G)
+        
         path_string = html.P(f"Total path to pick this order: {length} meter by {i+1} Operator(s)", style={"font-size":"18px"})
     
         return fig, path_string
