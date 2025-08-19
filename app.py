@@ -14,6 +14,7 @@ pio.templates.default = "plotly_white"
 
 app = Dash(__name__, title="Warehouse Dashboard", 
            external_stylesheets=[dbc.themes.MINTY, ])  # create the Dash app instance
+server = app.server
 
 ensure_logfile()
 # Load Warehouse Plot
